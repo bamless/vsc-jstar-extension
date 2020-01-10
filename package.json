@@ -3,6 +3,7 @@
     "displayName": "VS Code J* Extension",
     "description": "Syntax highlighting for J*",
     "version": "0.0.1",
+    "publisher": "Fabrizio Pietrucci",
     "engines": {
         "vscode": "^1.41.0"
     },
