@@ -1,0 +1,26 @@
+{
+    "name": "vsc-jstar-extension",
+    "displayName": "VS Code J* Extension",
+    "description": "Syntax highlighting for J*",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "jstar",
+            "aliases": ["J*", "jstar"],
+            "extensions": [".jsr",".jstar"],
+            "configuration": "./language-configuration.json",
+            "firstLine": "^#!\\s*/?.*jstar"
+        }],
+        "grammars": [{
+            "language": "jstar",
+            "scopeName": "source.jstar",
+            "path": "./syntaxes/jstar.tmLanguage.json"
+        }]
+    }
+}

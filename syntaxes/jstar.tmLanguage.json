@@ -1,0 +1,234 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "J*",
+	"patterns": [
+		{
+			"patterns": [{
+				"name": "comment.line.shabang",
+				"match": "\\A#!.*$\\n?"
+			}]
+		},
+		{
+			"name": "comment.line.double-dash",
+			"begin": "//",
+			"end": "\n"
+		},
+		{
+			"begin": "\\b(fun)\\s*(?:\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*)?(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.jstar"
+				},
+				"2": {
+					"name": "entity.name.function.jstar"
+				},
+				"3": {
+					"name": "punctuation.separator.parameter.jstar"
+				},
+				"4": {
+					"name": "punctuation.definition.parameters.begin.jstar"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.jstar"
+				}
+			},
+			"name": "meta.function.jstar",
+			"patterns": [
+				{"include": "#language-consts"},
+				{
+					"match": "[a-zA-Z_][a-zA-Z0-9_]*",
+					"name": "variable.parameter.function.jstar"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.arguments.jstar"
+				},
+				{"include": "#string-double-quote"},
+				{"include": "#string-single-quote"},
+				{"include": "#integer-hex"},
+				{"include": "#float-hex"},
+				{"include": "#integer"},
+				{"include": "#float"}
+			]
+		},
+		{
+			"begin": "\\b(native)\\s*(?:\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*)?(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.jstar"
+				},
+				"2": {
+					"name": "entity.name.function.jstar"
+				},
+				"3": {
+					"name": "punctuation.separator.parameter.jstar"
+				},
+				"4": {
+					"name": "punctuation.definition.parameters.begin.jstar"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.jstar"
+				}
+			},
+			"name": "meta.function.jstar",
+			"patterns": [
+				{"include": "#language-consts"},
+				{
+					"match": "[a-zA-Z_][a-zA-Z0-9_]*",
+					"name": "variable.parameter.function.jstar"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.arguments.jstar"
+				},
+				{"include": "#string-double-quote"},
+				{"include": "#string-single-quote"},
+				{"include": "#integer-hex"},
+				{"include": "#float-hex"},
+				{"include": "#integer"},
+				{"include": "#float"}
+			]
+		},
+		{"include": "#integer-hex"},
+		{"include": "#float-hex"},
+		{"include": "#integer"},
+		{"include": "#float"},
+		{
+			"patterns": [{
+				"name": "keyword.control.jstar",
+				"match": "\\b(if|else|elif|while|for|return|then|do|begin|end|try|except|ensure|with|continue|break)\\b"
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "keyword.other.jstar",
+				"match": "\\b(var|fun|native|class|raise|import|as|in|this|super)\\b"
+			}]
+		},
+		{"include": "#language-consts"},
+		{
+			"patterns": [{
+				"name": "keyword.operator.arith.jstar",
+				"match": "\\+|\\-|\\*|/|\\^|%"
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "keyword.operator.assign.jstar",
+				"match": "=|\\+=|\\-=|/=|\\*=|%="
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "keyword.operator.comparison.jstar",
+				"match": "<=|<|>=|>|==|!="
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "keyword.operator.boolean.jstar",
+				"match": "!|\\b(or|and)\\b"
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "keyword.operator.other.jstar",
+				"match": "#|##|\\b(is)\\b"
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "support.variable.jstar",
+				"match": "\\b(__name__)\\b"
+			}]
+		},
+		{
+			"patterns": [{
+				"name": "support.function.jstar",
+				"match": "\\b(assert|sorted|toList|ascii|char|eval|exec|int|system|print|type)\\b"
+			}]
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "entity.name.function.jstar"
+				}
+			},
+			"match": "\\b(_*[a-z]\\w*)\\s*\\b\\("
+		},
+		{
+			"patterns": [{
+				"name":  "entity.name.type",
+				"match": "\\b_*[A-Z]\\w*\\b"
+			}]
+		},
+		{
+			"include": "#string-double-quote"
+		},
+		{
+			"include": "#string-single-quote"
+		},
+		{
+			"name": "string.quoted.backtick.jstar",
+			"begin": "`",
+			"end": "`",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jstar",
+					"match": "\\\\."
+				}
+			]
+		}
+	],
+	"repository": {
+		"string-double-quote": {
+			"name": "string.quoted.double.jstar",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jstar",
+					"match": "\\\\."
+				}
+			]
+		},
+		"string-single-quote": {
+			"name": "string.quoted.single.jstar",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jstar",
+					"match": "\\\\."
+				}
+			]
+		},
+		"integer-hex": {
+			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(?![pPeE.0-9])",
+			"name": "constant.numeric.integer.hexadecimal.jstar"
+		},
+		"float-hex": {
+			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(\\.[0-9A-Fa-f]+)?([eE]-?\\d*)?([pP][-+]\\d+)?",
+			"name": "constant.numeric.float.hexadecimal.jstar"
+		},
+		"integer": {
+			"match": "(?<![\\w\\d.])\\d+(?![pPeE.0-9])",
+			"name": "constant.numeric.integer.jstar"
+		},
+		"float": {
+			"match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([eE]-?\\d*)?",
+			"name": "constant.numeric.float.jstar"
+		},
+		"language-consts": {
+			"match": "\\b(true|false|null)\\b",
+			"name": "constant.language.jstar"
+		}
+	},
+	"scopeName": "source.jstar"
+}
