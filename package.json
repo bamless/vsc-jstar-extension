@@ -2,7 +2,7 @@
     "name": "vsc-jstar-extension",
     "displayName": "VS Code J* Extension",
     "description": "Syntax highlighting for J*",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "bamless",
     "engines": {
         "vscode": "^1.41.0"
@@ -11,21 +11,31 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "jstar",
-            "aliases": ["J*", "jstar"],
-            "extensions": [".jsr",".jstar"],
-            "configuration": "./language-configuration.json",
-            "firstLine": "^#!\\s*/?.*jstar"
-        }],
-        "grammars": [{
-            "language": "jstar",
-            "scopeName": "source.jstar",
-            "path": "./syntaxes/jstar.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "jstar",
+                "aliases": [
+                    "J*",
+                    "jstar"
+                ],
+                "extensions": [
+                    ".jsr",
+                    ".jstar"
+                ],
+                "configuration": "./language-configuration.json",
+                "firstLine": "^#!\\s*/?.*jstar"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "jstar",
+                "scopeName": "source.jstar",
+                "path": "./syntaxes/jstar.tmLanguage.json"
+            }
+        ]
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/bamless/vsc-jstar-extension.git"
-      }
+    }
 }
