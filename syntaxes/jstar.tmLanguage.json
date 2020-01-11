@@ -102,13 +102,13 @@
 		{
 			"patterns": [{
 				"name": "keyword.control.jstar",
-				"match": "\\b(if|else|elif|while|for|return|then|do|begin|end|try|except|ensure|with|continue|break)\\b"
+				"match": "\\b(fun|native|import|class|raise|if|else|elif|while|for|return|then|do|begin|end|try|except|ensure|with|continue|break|as|in)\\b"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "keyword.other.jstar",
-				"match": "\\b(var|fun|native|class|raise|import|as|in|this|super)\\b"
+				"match": "\\b(var|this|super|or|and|is)\\b"
 			}]
 		},
 		{"include": "#language-consts"},
@@ -133,13 +133,13 @@
 		{
 			"patterns": [{
 				"name": "keyword.operator.boolean.jstar",
-				"match": "!|\\b(or|and)\\b"
+				"match": "!"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "keyword.operator.other.jstar",
-				"match": "#|##|\\b(is)\\b"
+				"match": "#|##"
 			}]
 		},
 		{
