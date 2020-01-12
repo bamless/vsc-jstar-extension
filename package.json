@@ -2,7 +2,7 @@
     "name": "vsc-jstar-extension",
     "displayName": "VS Code J* Extension",
     "description": "Syntax highlighting for J*",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "bamless",
     "engines": {
         "vscode": "^1.41.0"
