@@ -151,7 +151,7 @@
 		{
 			"patterns": [{
 				"name": "support.function.jstar",
-				"match": "\\b(assert|sorted|toList|ascii|char|eval|exec|int|system|print|type)\\b"
+				"match": "\\b(assert|sorted|toList|ascii|char|eval|exec|int|system|print|type|switch)\\b"
 			}]
 		},
 		{
