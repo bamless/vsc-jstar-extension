@@ -1,5 +1,6 @@
 {
     "name": "vsc-jstar-extension",
+    "icon": "images/jstar.png",
     "displayName": "VS Code J* Extension",
     "description": "Syntax highlighting for J*",
     "version": "0.0.2",
