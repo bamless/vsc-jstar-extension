@@ -139,19 +139,19 @@
 		{
 			"patterns": [{
 				"name": "keyword.operator.other.jstar",
-				"match": "#|##"
+				"match": "#|##|\\.\\.\\."
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "support.variable.jstar",
-				"match": "\\b(__name__)\\b"
+				"match": "\\b(__name__|argv)\\b"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "support.function.jstar",
-				"match": "\\b(assert|sorted|toList|ascii|char|eval|exec|int|system|print|type|switch)\\b"
+				"match": "\\b(assert|typeAssert|sorted|reduce|any|all|toList|toTable|ascii|char|eval|garbageCollect|importPaths|int|print|type)\\b"
 			}]
 		},
 		{
