@@ -37,7 +37,6 @@
 			},
 			"name": "meta.function.jstar",
 			"patterns": [
-				{"include": "#language-consts"},
 				{
 					"match": "[a-zA-Z_][a-zA-Z0-9_]*",
 					"name": "variable.parameter.function.jstar"
@@ -46,8 +45,13 @@
 					"match": ",",
 					"name": "punctuation.separator.arguments.jstar"
 				},
+				{
+					"match": "\\b(=|\\.\\.\\.)\\b",
+					"name": "keyword.operator.defaultargs"
+				},
 				{"include": "#string-double-quote"},
 				{"include": "#string-single-quote"},
+				{"include": "#language-consts"},
 				{"include": "#integer-hex"},
 				{"include": "#float-hex"},
 				{"include": "#integer"},
@@ -78,7 +82,6 @@
 			},
 			"name": "meta.function.jstar",
 			"patterns": [
-				{"include": "#language-consts"},
 				{
 					"match": "[a-zA-Z_][a-zA-Z0-9_]*",
 					"name": "variable.parameter.function.jstar"
@@ -87,8 +90,13 @@
 					"match": ",",
 					"name": "punctuation.separator.arguments.jstar"
 				},
+				{
+					"match": "\\b(=|\\.\\.\\.)\\b",
+					"name": "keyword.operator.defaultargs"
+				},
 				{"include": "#string-double-quote"},
 				{"include": "#string-single-quote"},
+				{"include": "#language-consts"},
 				{"include": "#integer-hex"},
 				{"include": "#float-hex"},
 				{"include": "#integer"},
@@ -173,17 +181,6 @@
 		},
 		{
 			"include": "#string-single-quote"
-		},
-		{
-			"name": "string.quoted.backtick.jstar",
-			"begin": "`",
-			"end": "`",
-			"patterns": [
-				{
-					"name": "constant.character.escape.jstar",
-					"match": "\\\\."
-				}
-			]
 		}
 	],
 	"repository": {
@@ -210,19 +207,19 @@
 			]
 		},
 		"integer-hex": {
-			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(?![pPeE.0-9])",
+			"match": "(?<![\\w\\d.])0[x][0-9a-f]+(?![e.0-9])",
 			"name": "constant.numeric.integer.hexadecimal.jstar"
 		},
 		"float-hex": {
-			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(\\.[0-9A-Fa-f]+)?([eE]-?\\d*)?([pP][-+]\\d+)?",
+			"match": "(?<![\\w\\d.])0[x][0-9a-f]+(\\.[0-9a-f]+)?([e]-?\\d*)?",
 			"name": "constant.numeric.float.hexadecimal.jstar"
 		},
 		"integer": {
-			"match": "(?<![\\w\\d.])\\d+(?![pPeE.0-9])",
+			"match": "(?<![\\w\\d.])\\d+(?![e.0-9])",
 			"name": "constant.numeric.integer.jstar"
 		},
 		"float": {
-			"match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([eE]-?\\d*)?",
+			"match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([e]-?\\d*)?",
 			"name": "constant.numeric.float.jstar"
 		},
 		"language-consts": {
