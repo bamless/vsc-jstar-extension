@@ -110,7 +110,7 @@
 		{
 			"patterns": [{
 				"name": "keyword.control.jstar",
-				"match": "\\b(fun|native|import|class|raise|if|else|elif|while|for|return|then|do|begin|end|try|except|ensure|with|continue|break|as|in)\\b"
+				"match": "\\b(fun|native|import|class|raise|if|else|elif|while|for|return|then|do|begin|end|try|except|ensure|with|continue|break|as|in|static)\\b"
 			}]
 		},
 		{
