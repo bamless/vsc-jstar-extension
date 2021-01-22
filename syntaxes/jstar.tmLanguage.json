@@ -153,13 +153,13 @@
 		{
 			"patterns": [{
 				"name": "keyword.operator.logical.jstar",
-				"match": "\\b(!|or|and)\\b"
+				"match": "!|or|and"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "keyword.operator.other.jstar",
-				"match": "\\b(#|##|\\.\\.\\.|is)\\b"
+				"match": "#|##|\\.\\.\\.|is"
 			}]
 		},
 		{
