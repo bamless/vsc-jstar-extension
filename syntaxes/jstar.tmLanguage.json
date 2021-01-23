@@ -116,13 +116,13 @@
 		{
 			"patterns": [{
 				"name": "variable.language.this.jstar",
-				"match": "this"
+				"match": "\\b(this)\\b"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "variable.language.super.jstar",
-				"match": "super"
+				"match": "\\b(super)\\b"
 			}]
 		},
 		{
@@ -153,13 +153,13 @@
 		{
 			"patterns": [{
 				"name": "keyword.operator.logical.jstar",
-				"match": "!|or|and"
+				"match": "!|\\b(or|and)\\b"
 			}]
 		},
 		{
 			"patterns": [{
 				"name": "keyword.operator.other.jstar",
-				"match": "#|##|\\.\\.\\.|is"
+				"match": "#|##|\\.\\.\\.|\\b(is)\\b"
 			}]
 		},
 		{
