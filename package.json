@@ -3,7 +3,7 @@
     "icon": "images/jstar.png",
     "displayName": "VS Code J* Extension",
     "description": "Syntax highlighting for J*",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "bamless",
     "engines": {
         "vscode": "^1.41.0"
