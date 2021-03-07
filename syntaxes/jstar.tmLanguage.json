@@ -159,7 +159,7 @@
 		{
 			"patterns": [{
 				"name": "keyword.operator.other.jstar",
-				"match": "#|##|\\.\\.\\.|\\b(is)\\b"
+				"match": "#|##|&|\\||~|<<|>>|\\.\\.\\.|\\b(is)\\b"
 			}]
 		},
 		{
