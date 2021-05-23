@@ -171,7 +171,7 @@
 		{
 			"patterns": [{
 				"name": "support.function.jstar",
-				"match": "\\b(assert|typeAssert|sorted|reduce|any|all|toList|toTable|ascii|char|eval|garbageCollect|int|print|type)\\b"
+				"match": "\\b(typeAssert|assert|partial|ascii|char|eval|garbageCollect|int|print|type)\\b"
 			}]
 		},
 		{

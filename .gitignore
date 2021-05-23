@@ -1,1 +1,5 @@
-.vscode/**
+out
+node_modules
+client/server
+.vscode-test
+vsc-jstar-extension-*.vsix

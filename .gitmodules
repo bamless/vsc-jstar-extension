@@ -1,0 +1,3 @@
+[submodule "server/extern/pulsar"]
+	path = server/extern/pulsar
+	url = https://github.com/bamless/pulsar.git

@@ -1,4 +1,21 @@
 .vscode/**
-.vscode-test/**
+**/*.ts
+**/*.map
 .gitignore
-vsc-extension-quickstart.md
+.gitmodules
+**/.git
+**/.gitignore
+**/.vscode
+**/tsconfig.json
+**/tsconfig.base.json
+contributing.md
+.travis.yml
+.eslintignore
+.eslintrc.js
+# client/node_modules/**
+# !client/node_modules/vscode-jsonrpc/**
+# !client/node_modules/vscode-languageclient/**
+# !client/node_modules/vscode-languageserver-protocol/**
+# !client/node_modules/vscode-languageserver-types/**
+# !client/node_modules/lru-cache/**
+# !client/node_modules/semver/**
