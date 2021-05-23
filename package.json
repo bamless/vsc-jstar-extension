@@ -23,76 +23,76 @@
     "main": "./client/out/extension",
     "contributes": {
         "configuration": {
-			"type": "object",
-			"title": "Pulsar configuration",
-			"properties": {
+            "type": "object",
+            "title": "Pulsar configuration",
+            "properties": {
                 "jstarLangServer.jstarExecutable": {
                     "scope": "resource",
                     "type": "string",
                     "default": "jstar",
                     "description": "J* executable file path"
                 },
-				"jstarLangServer.maxNumberOfProblems": {
-					"scope": "resource",
-					"type": "number",
-					"default": 100,
-					"description": "Controls the maximum number of problems produced by the server."
-				},
+                "jstarLangServer.maxNumberOfProblems": {
+                    "scope": "resource",
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the server."
+                },
                 "jstarLangServer.disableVarResolve": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Disable variable resolution pass. Equivalent to `-V` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Disable variable resolution pass. Equivalent to `-V` pulsar option."
+                },
                 "jstarLangServer.noRedefinedGlobals": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Do not issue errors on redefinition of global variables. Equivalent to `-g` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Do not issue errors on redefinition of global variables. Equivalent to `-g` pulsar option."
+                },
                 "jstarLangServer.disableUnreachPass": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Disable unreachable code chacking pass. Equivalent to `-U` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Disable unreachable code chacking pass. Equivalent to `-U` pulsar option."
+                },
                 "jstarLangServer.noUnusedArgs": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Do not issue warnings about unused function arguments. Equivalent to `-a` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Do not issue warnings about unused function arguments. Equivalent to `-a` pulsar option."
+                },
                 "jstarLangServer.disableUnusedPass": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Disable unused variable detection pass. Equivalent to `-u` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Disable unused variable detection pass. Equivalent to `-u` pulsar option."
+                },
                 "jstarLangServer.disableReturnPass": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Disable return checking pass. Equivalent to `-r` pulsar option."
-				},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Disable return checking pass. Equivalent to `-r` pulsar option."
+                },
                 "jstarLangServer.disableAccessPass": {
-					"scope": "resource",
-					"type": "boolean",
-					"default": false,
-					"description": "Disable access checking pass. Equivalent to `-A` pulsar option."
-				},
-				"jstarLangServer.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off",
-					"description": "Traces the communication between VS Code and the language server."
-				}
-			}
-		},
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Disable access checking pass. Equivalent to `-A` pulsar option."
+                },
+                "jstarLangServer.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the language server."
+                }
+            }
+        },
         "languages": [
             {
                 "id": "jstar",
@@ -118,19 +118,23 @@
         ]
     },
     "scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -b",
-		"watch": "tsc -b -w",
-		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-		"test": "sh ./scripts/e2e.sh"
-	},
-	"devDependencies": {
-		"@types/mocha": "^8.2.2",
-		"@types/node": "^12.12.0",
-		"@typescript-eslint/eslint-plugin": "^4.23.0",
-		"@typescript-eslint/parser": "^4.23.0",
-		"eslint": "^7.26.0",
-		"mocha": "^8.3.2",
-		"typescript": "^4.2.3"
-	}
+        "vscode:prepublish": "npm run -S esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./client/src/extension.ts --bundle --outfile=./client/out/extension.js --external:vscode --format=cjs --platform=node --minify && esbuild ./server/src/server.ts --bundle --outfile=./server/out/server.js --external:vscode --format=cjs --platform=node --minify",
+        "esbuild": "npm run -S esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run -S esbuild-base -- --sourcemap --watch",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+        "test": "sh ./scripts/e2e.sh"
+    },
+    "devDependencies": {
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^12.12.0",
+        "@typescript-eslint/eslint-plugin": "^4.23.0",
+        "@typescript-eslint/parser": "^4.23.0",
+        "esbuild": "^0.12.1",
+        "eslint": "^7.26.0",
+        "mocha": "^8.3.2",
+        "typescript": "^4.2.3"
+    }
 }

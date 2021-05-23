@@ -12,6 +12,7 @@ contributing.md
 .travis.yml
 .eslintignore
 .eslintrc.js
+**/node_modules
 # client/node_modules/**
 # !client/node_modules/vscode-jsonrpc/**
 # !client/node_modules/vscode-languageclient/**
