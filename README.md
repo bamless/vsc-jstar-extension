@@ -2,4 +2,5 @@
 Visual Studio Code support for the for the [J*](https://github.com/bamless/jstar) language.
 
 ## Features
-For now this extension provides only basic syntax highlighting
+This extension supports syntax highlighting and linting via the [Pulsar](https://github.com/bamless/pulsar.git)
+static analyzer.
