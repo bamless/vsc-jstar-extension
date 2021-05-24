@@ -19,7 +19,7 @@ analyzer.
 
 - Minor bugfixes
 
-## [1.1.0] - 2021-05-24
+## [1.1.2] - 2021-05-24
 
 - Using Pulsar v0.0.2
 - Fixed bugs concerning paths with backward slashes separators on Windows
