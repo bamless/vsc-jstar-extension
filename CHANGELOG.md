@@ -14,3 +14,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added support for linting by integrating the [Pulsar](https://github.com/bamless/pulsar) static
 analyzer.
 - Aligned syntax highlighting with **J\*** v1.8.4
+
+## [1.1.1] - 2021-05-23
+
+- Minor bugfixes
+
+## [1.1.0] - 2021-05-24
+
+- Using Pulsar v0.0.2
+- Fixed bugs concerning paths with backward slashes separators on Windows

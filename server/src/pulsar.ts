@@ -5,8 +5,10 @@ import { spawnSync } from 'child_process'
 import * as path from 'path'
 import { PulsarSettings } from './settings';
 
-const pulsarScript = path.normalize(path.join(__dirname, '..', 'res', 'run_pulsar.jsr'));
-const pulsarModule = path.normalize(path.join(__dirname, '..', 'extern', 'pulsar'));
+import slash = require('slash')
+
+const pulsarScript = slash(path.normalize(path.join(__dirname, '..', 'res', 'run_pulsar.jsr')));
+const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', 'pulsar')));
 
 export class Pulsar {
 	public analyze(sourceFile: TextDocument, settings: PulsarSettings): Diagnostic[] {

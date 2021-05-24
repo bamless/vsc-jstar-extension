@@ -1,21 +1,22 @@
 {
     "name": "vsc-jstar-server",
-	"description": "J* language server",
-	"version": "1.0.0",
-	"author": "bamless",
+    "description": "J* language server",
+    "version": "1.0.0",
+    "author": "bamless",
     "publisher": "bamless",
-	"license": "MIT",
-	"engines": {
-		"node": "*"
-	},
+    "license": "MIT",
+    "engines": {
+        "node": "*"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/bamless/vsc-jstar-extension.git"
     },
-	"dependencies": {
-		"vscode-languageserver": "^7.0.0",
-		"vscode-languageserver-textdocument": "^1.0.1",
-		"yo": "^4.2.0"
-	},
-	"scripts": {}
+    "dependencies": {
+        "slash": "^3.0.0",
+        "vscode-languageserver": "^7.0.0",
+        "vscode-languageserver-textdocument": "^1.0.1",
+        "yo": "^4.2.0"
+    },
+    "scripts": {}
 }
