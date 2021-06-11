@@ -1,4 +1,4 @@
-# Syntax Highlighter for J*
+# Syntax highlighting and linting for the J* language
 Visual Studio Code support for the for the [J*](https://github.com/bamless/jstar) language.
 
 ## Features
