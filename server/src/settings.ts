@@ -1,4 +1,4 @@
-export interface PulsarSettings {
+export interface JStarSettings {
 	jstarExecutable: string;
 	maxNumberOfProblems: number;
 	disableVarResolve: boolean;

@@ -9,7 +9,7 @@ import {
 } from 'vscode-languageserver/node';
 
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { PulsarSettings } from './settings'
+import { JStarSettings } from './settings'
 import { Pulsar } from './pulsar'
 
 const connection = createConnection(ProposedFeatures.all);
@@ -64,7 +64,7 @@ connection.onInitialized(() => {
 });
 
 // If the client doesn't support configuration, then use these as defaults
-const defaultSettings: PulsarSettings = {
+const defaultSettings: JStarSettings = {
 	jstarExecutable: "jstar",
 	maxNumberOfProblems: 1000,
 	disableVarResolve: false,
@@ -75,17 +75,17 @@ const defaultSettings: PulsarSettings = {
 	disableReturnPass: false,
 	disableAccessPass: false,
 };
-let globalSettings: PulsarSettings = defaultSettings;
+let globalSettings: JStarSettings = defaultSettings;
 
 // Open documents setting cache
-const documentSettings: Map<string, Thenable<PulsarSettings>> = new Map();
+const documentSettings: Map<string, Thenable<JStarSettings>> = new Map();
 
 connection.onDidChangeConfiguration(change => {
 	if (hasConfigurationCapability) {
 		documentSettings.clear();
 	} else {
-		globalSettings = <PulsarSettings>(
-			(change.settings.jstarLangServer || defaultSettings)
+		globalSettings = <JStarSettings>(
+			(change.settings.jstar || defaultSettings)
 		);
 	}
 
@@ -93,7 +93,7 @@ connection.onDidChangeConfiguration(change => {
 	documents.all().forEach(validateTextDocument);
 });
 
-function getDocumentSettings(resource: string): Thenable<PulsarSettings> {
+function getDocumentSettings(resource: string): Thenable<JStarSettings> {
 	if (!hasConfigurationCapability) {
 		return Promise.resolve(globalSettings);
 	}
@@ -101,7 +101,7 @@ function getDocumentSettings(resource: string): Thenable<PulsarSettings> {
 	if (!result) {
 		result = connection.workspace.getConfiguration({
 			scopeUri: resource,
-			section: 'jstarLangServer'
+			section: 'jstar'
 		});
 		documentSettings.set(resource, result);
 	}
@@ -118,13 +118,13 @@ documents.onDidChangeContent(change => {
 
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	const settings = await getDocumentSettings(textDocument.uri);
-	let diagnostics = pulsar.analyze(textDocument, settings);
-	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+	try {
+		let diagnostics = pulsar.analyze(textDocument, settings);
+		connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+	} catch(Error) {
+		connection.console.log(Error.message);
+	}
 }
-
-connection.onDidChangeWatchedFiles(_change => {
-	connection.console.log('We received an file change event');
-});
 
 // Make the text document manager listen on the connection
 // for open, change and close text document events

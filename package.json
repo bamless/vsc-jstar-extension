@@ -24,63 +24,63 @@
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "Pulsar configuration",
+            "title": "J*",
             "properties": {
-                "jstarLangServer.jstarExecutable": {
+                "jstar.jstarExecutable": {
                     "scope": "resource",
                     "type": "string",
                     "default": "jstar",
                     "description": "J* executable file path"
                 },
-                "jstarLangServer.maxNumberOfProblems": {
+                "jstar.maxNumberOfProblems": {
                     "scope": "resource",
                     "type": "number",
                     "default": 100,
                     "description": "Controls the maximum number of problems produced by the server."
                 },
-                "jstarLangServer.disableVarResolve": {
+                "jstar.disableVarResolve": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Disable variable resolution pass. Equivalent to `-V` pulsar option."
                 },
-                "jstarLangServer.noRedefinedGlobals": {
+                "jstar.noRedefinedGlobals": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Do not issue errors on redefinition of global variables. Equivalent to `-g` pulsar option."
                 },
-                "jstarLangServer.disableUnreachPass": {
+                "jstar.disableUnreachPass": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Disable unreachable code chacking pass. Equivalent to `-U` pulsar option."
                 },
-                "jstarLangServer.noUnusedArgs": {
+                "jstar.noUnusedArgs": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Do not issue warnings about unused function arguments. Equivalent to `-a` pulsar option."
                 },
-                "jstarLangServer.disableUnusedPass": {
+                "jstar.disableUnusedPass": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Disable unused variable detection pass. Equivalent to `-u` pulsar option."
                 },
-                "jstarLangServer.disableReturnPass": {
+                "jstar.disableReturnPass": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Disable return checking pass. Equivalent to `-r` pulsar option."
                 },
-                "jstarLangServer.disableAccessPass": {
+                "jstar.disableAccessPass": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Disable access checking pass. Equivalent to `-A` pulsar option."
                 },
-                "jstarLangServer.trace.server": {
+                "jstar.trace.server": {
                     "scope": "window",
                     "type": "string",
                     "enum": [
