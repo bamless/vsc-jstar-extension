@@ -11,7 +11,7 @@ const pulsarScript = slash(path.normalize(path.join(__dirname, '..', 'res', 'run
 const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', 'pulsar')));
 
 export class Pulsar {
-    private constructor() {}
+    private constructor() { }
 
     public static analyze(sourceFile: TextDocument, settings: JStarSettings): Promise<Diagnostic[]> {
         return new Promise<Diagnostic[]>((resolve, reject) => {
@@ -37,8 +37,7 @@ export class Pulsar {
 
             pulsarProc.on('close', (code: integer) => {
                 if (code != 0) {
-                    reject(new PulsarExecutionError(`Error executing pulsar: ${stderrBuf.join().trim()}`));
-                    return;
+                    return reject(new PulsarExecutionError(`Error executing pulsar: ${stderrBuf.join().trim()}`));
                 }
 
                 const diagnostics: Diagnostic[] = [];
