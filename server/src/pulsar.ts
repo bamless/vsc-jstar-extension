@@ -1,12 +1,11 @@
 import { Diagnostic, DiagnosticSeverity, integer } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 
-import { spawn, spawnSync } from 'child_process'
+import { spawn } from 'child_process'
 import * as path from 'path'
 import { JStarSettings } from './settings';
 
 import slash = require('slash')
-import { rejects } from 'assert';
 
 const pulsarScript = slash(path.normalize(path.join(__dirname, '..', 'res', 'run_pulsar.jsr')));
 const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', 'pulsar')));
