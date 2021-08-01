@@ -1,55 +1,71 @@
-import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver/node';
+import { Diagnostic, DiagnosticSeverity, integer } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 
-import { spawnSync } from 'child_process'
+import { spawn, spawnSync } from 'child_process'
 import * as path from 'path'
 import { JStarSettings } from './settings';
 
 import slash = require('slash')
+import { rejects } from 'assert';
 
 const pulsarScript = slash(path.normalize(path.join(__dirname, '..', 'res', 'run_pulsar.jsr')));
 const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', 'pulsar')));
 
 export class Pulsar {
-	public analyze(sourceFile: TextDocument, settings: JStarSettings): Diagnostic[] {
-		let proc = spawnSync(settings.jstarExecutable, [
-			'-E',
-			'-e', `importPaths.insert(0, "${pulsarModule}")`,
-			pulsarScript, sourceFile.uri, sourceFile.getText()
-		].concat(this.buildOptionList(settings)));
+	public analyze(sourceFile: TextDocument, settings: JStarSettings): Promise<Diagnostic[]> {
+		return new Promise<Diagnostic[]>((resolve, reject) => {
+			let pulsarProc = spawn(settings.jstarExecutable, [
+				'-E', '-e', `importPaths.insert(0, "${pulsarModule}")`,
+				pulsarScript, sourceFile.uri, sourceFile.getText()
+			].concat(this.buildOptionList(settings)));
 
-		if (proc.status != 0) {
-			throw new Error(
-				"Error executing pulsar:\n" +
-				(proc.error ? proc.error?.name + " " + proc.error?.message + "\n" : "") +
-				(proc.stderr ? proc.stderr.toString() : "")
-			)
-		}
+			let stdoutBuf: string[] = [];
+			let stderrBuf: string[] = [];
 
-		const diagnostics: Diagnostic[] = [];
-		let outputString = proc.stdout.toString().trim();
-		let outputLines = outputString ? outputString.split("\n") : [];
+			pulsarProc.stdout.on('data', (data: string) => {
+				stdoutBuf.push(data);
+			})
 
-		for (const { index, element: line } of enumerate(outputLines)) {
-			if (index == settings.maxNumberOfProblems - 1) break;
+			pulsarProc.stderr.on('data', (data: string) => {
+				stderrBuf.push(data);
+			})
 
-			let jsonDiagnostic = JSON.parse(line)
+			pulsarProc.on('error', (err: Error) => {
+				reject(new PulsarExecutionError(`Cannot find J* executable: ${err.message}`));
+			})
 
-			const diagnostic: Diagnostic = {
-				severity: jsonDiagnostic.severity == 'error' ?
-					DiagnosticSeverity.Error : DiagnosticSeverity.Warning,
-				range: {
-					start: sourceFile.positionAt(jsonDiagnostic.start),
-					end: sourceFile.positionAt(jsonDiagnostic.end)
-				},
-				message: jsonDiagnostic.message,
-				source: 'pulsar'
-			};
+			pulsarProc.on('close', (code: integer) => {
+				if (code != 0) {
+					reject(new PulsarExecutionError(`Error executing pulsar: ${stderrBuf.join().trim()}`));
+					return;
+				}
 
-			diagnostics.push(diagnostic);
-		}
+				const diagnostics: Diagnostic[] = [];
+				let outputString = stdoutBuf.join().trim();
+				let outputLines = outputString ? outputString.split("\n") : [];
 
-		return diagnostics;
+				for (const { index, element: line } of enumerate(outputLines)) {
+					if (index == settings.maxNumberOfProblems - 1) break;
+
+					let jsonDiagnostic = JSON.parse(line)
+
+					const diagnostic: Diagnostic = {
+						severity: jsonDiagnostic.severity == 'error' ?
+							DiagnosticSeverity.Error : DiagnosticSeverity.Warning,
+						range: {
+							start: sourceFile.positionAt(jsonDiagnostic.start),
+							end: sourceFile.positionAt(jsonDiagnostic.end)
+						},
+						message: jsonDiagnostic.message,
+						source: 'pulsar'
+					};
+
+					diagnostics.push(diagnostic);
+				}
+
+				resolve(diagnostics);
+			});
+		});
 	}
 
 	private buildOptionList(settings: JStarSettings): Array<string> {
@@ -69,6 +85,12 @@ export class Pulsar {
 		if (settings.disableAccessPass)
 			optionList.push('-A');
 		return optionList;
+	}
+}
+
+export class PulsarExecutionError extends Error {
+	constructor(message: string) {
+		super(message);
 	}
 }
 

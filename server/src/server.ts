@@ -10,7 +10,7 @@ import {
 
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { JStarSettings } from './settings'
-import { Pulsar } from './pulsar'
+import { Pulsar, PulsarExecutionError } from './pulsar'
 
 const connection = createConnection(ProposedFeatures.all);
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
@@ -119,10 +119,14 @@ documents.onDidChangeContent(change => {
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	const settings = await getDocumentSettings(textDocument.uri);
 	try {
-		let diagnostics = pulsar.analyze(textDocument, settings);
+		let diagnostics = await pulsar.analyze(textDocument, settings);
 		connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-	} catch(Error) {
-		connection.console.log(Error.message);
+	} catch(e) {
+		if(e instanceof PulsarExecutionError) {
+			connection.console.log(e.message);
+		} else {
+			throw e;
+		}
 	}
 }
 
