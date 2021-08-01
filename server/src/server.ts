@@ -14,7 +14,6 @@ import { Pulsar, PulsarExecutionError } from './pulsar'
 
 const connection = createConnection(ProposedFeatures.all);
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
-const pulsar: Pulsar = new Pulsar();
 
 let hasConfigurationCapability = false;
 let hasWorkspaceFolderCapability = false;
@@ -119,7 +118,7 @@ documents.onDidChangeContent(change => {
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
     const settings = await getDocumentSettings(textDocument.uri);
     try {
-        let diagnostics = await pulsar.analyze(textDocument, settings);
+        let diagnostics = await Pulsar.analyze(textDocument, settings);
         connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
     } catch (e) {
         if (e instanceof PulsarExecutionError) {

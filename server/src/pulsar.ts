@@ -11,12 +11,14 @@ const pulsarScript = slash(path.normalize(path.join(__dirname, '..', 'res', 'run
 const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', 'pulsar')));
 
 export class Pulsar {
-    public analyze(sourceFile: TextDocument, settings: JStarSettings): Promise<Diagnostic[]> {
+    private constructor() {}
+    
+    public static analyze(sourceFile: TextDocument, settings: JStarSettings): Promise<Diagnostic[]> {
         return new Promise<Diagnostic[]>((resolve, reject) => {
             let pulsarProc = spawn(settings.jstarExecutable, [
                 '-E', '-e', `importPaths.insert(0, "${pulsarModule}")`,
                 pulsarScript, sourceFile.uri, sourceFile.getText()
-            ].concat(this.buildOptionList(settings)));
+            ].concat(Pulsar.buildOptionList(settings)));
 
             let stdoutBuf: string[] = [];
             let stderrBuf: string[] = [];
@@ -44,7 +46,7 @@ export class Pulsar {
                 let outputLines = outputString ? outputString.split("\n") : [];
 
                 for (const { index, element: line } of enumerate(outputLines)) {
-                    if (index == settings.maxNumberOfProblems - 1) break;
+                    if (index == settings.maxNumberOfProblems) break;
 
                     let jsonDiagnostic = JSON.parse(line)
 
@@ -67,7 +69,7 @@ export class Pulsar {
         });
     }
 
-    private buildOptionList(settings: JStarSettings): Array<string> {
+    private static buildOptionList(settings: JStarSettings): Array<string> {
         let optionList: Array<string> = [];
         if (settings.disableVarResolve)
             optionList.push('-v');
