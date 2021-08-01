@@ -12,7 +12,7 @@ const pulsarModule = slash(path.normalize(path.join(__dirname, '..', 'extern', '
 
 export class Pulsar {
     private constructor() {}
-    
+
     public static analyze(sourceFile: TextDocument, settings: JStarSettings): Promise<Diagnostic[]> {
         return new Promise<Diagnostic[]>((resolve, reject) => {
             let pulsarProc = spawn(settings.jstarExecutable, [
