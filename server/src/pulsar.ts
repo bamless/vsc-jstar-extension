@@ -71,7 +71,7 @@ export class Pulsar {
     private static buildOptionList(settings: JStarSettings): Array<string> {
         let optionList: Array<string> = [];
         if (settings.disableVarResolve)
-            optionList.push('-v');
+            optionList.push('-V');
         if (settings.noRedefinedGlobals)
             optionList.push('-g');
         if (settings.disableUnreachPass)
