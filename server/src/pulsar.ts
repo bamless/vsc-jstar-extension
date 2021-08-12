@@ -37,17 +37,18 @@ export class Pulsar {
 
             pulsarProc.on('close', (code: integer) => {
                 if (code != 0) {
-                    return reject(new PulsarExecutionError(`Error executing pulsar: ${stderrBuf.join().trim()}`));
+                    reject(new PulsarExecutionError(`Error executing pulsar: ${stderrBuf.join().trim()}`));
+                    return;
                 }
 
                 const diagnostics: Diagnostic[] = [];
-                let outputString = stdoutBuf.join().trim();
+                let outputString = stdoutBuf.join("").trim();
                 let outputLines = outputString ? outputString.split("\n") : [];
 
                 for (const { index, element: line } of enumerate(outputLines)) {
                     if (index == settings.maxNumberOfProblems) break;
 
-                    let jsonDiagnostic = JSON.parse(line)
+                    let jsonDiagnostic = JSON.parse(line);
 
                     const diagnostic: Diagnostic = {
                         severity: jsonDiagnostic.severity == 'error' ?
