@@ -1,0 +1,96 @@
+{
+
+	"For Loop": {
+		"prefix": "for",
+		"body": [
+			"for var ${1:item} = 0; ${1:item} < ${2:10}; ${1:item} += 1",
+			"\t$3",
+			"end"
+		],
+		"description": "Make a for loop that goes for a specified about of time"
+	},
+
+	"For List": {
+		"prefix": "for",
+		"body": [
+			"for ${1:item} in ${2:list}",
+			"\t$3",
+			"end"
+		],
+		"description": "Make a for loop that goes though a list"
+	},
+
+	"If": {
+		"prefix": "if",
+		"body": [
+			"if $1",
+			"\t$2",
+			"end"
+		],
+		"description": "Make an if"
+	},
+
+	"If Else": {
+		"prefix": "if",
+		"body": [
+			"if $1",
+			"\t$2",
+			"else",
+			"\t$3",
+			"end"
+		],
+		"description": "Make an if else"
+	},
+	"Function": {
+		"prefix": "fun",
+		"body": [
+			"fun $1()",
+			"\t$2",
+			"end"
+		],
+		"description": ""
+	},
+
+	"args": {
+		"prefix": "args",
+		"body": [
+			"args"
+		],
+		"description": ""
+	},
+
+
+	"True": {"prefix": "true","body": ["true"],"description": ""},
+	"False": {"prefix": "false","body": ["false"],"description": ""},
+	"null": {"prefix": "null","body": ["null"],"description": ""},
+	"and": {"prefix": "and","body": ["and"],"description": ""},
+	"or": {"prefix": "or","body": ["or"],"description": ""},
+	"else": {"prefix": "else","body": ["else"],"description": ""},
+	"native": {"prefix": "native","body": ["native"],"description": ""},
+	"while": {"prefix": "while","body": ["while"],"description": ""},
+	"in": {"prefix": "in","body": ["in"],"description": ""},
+	"begin": {"prefix": "begin","body": ["begin"],"description": ""},
+	"end": {"prefix": "end","body": ["end"],"description": ""},
+	"as": {"prefix": "as","body": ["as"],"description": ""},
+	"is": {"prefix": "is","body": ["is"],"description": ""},
+	"try": {"prefix": "try","body": ["try"],"description": ""},
+	"ensure": {"prefix": "ensure","body": ["ensure"],"description": ""},
+	"except": {"prefix": "except","body": ["except"],"description": ""},
+	"raise": {"prefix": "raise","body": ["raise"],"description": ""},
+	"with": {"prefix": "with","body": ["with"],"description": ""},
+	"continue": {"prefix": "continue","body": ["continue"],"description": ""},
+	"break": {"prefix": "break","body": ["break"],"description": ""},
+	"static": {"prefix": "static","body": ["static"],"description": ""},
+	"return": {"prefix": "return","body": ["return"],"description": ""},
+	"import": {"prefix": "import","body": ["import"],"description": ""},
+	"super": {"prefix": "super","body": ["super"],"description": ""},
+	"class": {"prefix": "class","body": ["class"],"description": ""},
+	"Type": {"prefix": "type()","body": ["type()"],"description": ""},
+	"Number": {"prefix": "Number()","body": ["Number()"],"description": ""},
+	"Boolean": {"prefix": "Boolean()","body": ["Boolean()"],"description": ""},
+	"String": {"prefix": "String()","body": ["String()"],"description": ""},
+	"List": {"prefix": "List()","body": ["List()"],"description": ""},
+	"Table": {"prefix": "Table()","body": ["Table()"],"description": ""},
+	"Variable": {"prefix": "var","body": ["var"],"description": ""}	
+
+}
