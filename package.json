@@ -22,6 +22,7 @@
     ],
     "main": "./client/out/extension",
     "contributes": {
+
         "configuration": {
             "type": "object",
             "title": "J*",
@@ -91,7 +92,14 @@
                     "default": "off",
                     "description": "Traces the communication between VS Code and the language server."
                 }
-            }
+            },
+
+            "snippets": [
+                {
+                  "language": "jstar",
+                  "path": "snippets.json"
+                }
+            ]
         },
         "languages": [
             {
